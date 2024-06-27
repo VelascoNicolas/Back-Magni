@@ -6,9 +6,10 @@ RUN apk add openjdk17
 COPY . .
 RUN chmod +x ./gradlew
 RUN ./gradlew bootJar --no-daemon
+RUN apt-get update && apt-get install -y fontconfig libfreetype6 && rm -rf /var/lib/apt/lists/*
 
 FROM openjdk:17-alpine
 EXPOSE 8080
 COPY --from=build ./build/libs/buenSabor-0.0.1-SNAPSHOT.jar ./app.jar
 
-ENTRYPOINT ["java", "-jar", "/app.jar", "-web -webAllowOthers -tcp -tcpAllowOthers -browser"]
+ENTRYPOINT ["java", "-jar", "/app.jar"]
