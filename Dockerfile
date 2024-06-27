@@ -3,7 +3,10 @@ FROM alpine:latest as build
 RUN apk update
 RUN apk add openjdk17
 
-RUN apk add --no-cache fontconfig ttf-dejavu
+ # Install required libraries
+RUN apk add --no-cache freetype fontconfig
+RUN apk add --no-cache msttcorefonts-installer fontconfig
+RUN update-ms-fonts
 
 COPY . .
 RUN chmod +x ./gradlew

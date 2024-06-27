@@ -61,7 +61,7 @@ public class EstadisticasController {
         byte[] excelContent = service.rankingExcel(fechaDesde, fechaHasta);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        headers.set(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=estadisticasRanking.xls");
+        headers.set(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=estadisticasRanking.xlsx");
         headers.setContentLength(excelContent.length);
 
         return ResponseEntity.ok()
@@ -77,7 +77,7 @@ public class EstadisticasController {
         byte[] excelContent = service.ingresosDiariosExcel(fechaDesde, fechaHasta);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        headers.set(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=estadisticasIDiario.xls");
+        headers.set(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=estadisticasIDiario.xlsx");
         headers.setContentLength(excelContent.length);
 
         return ResponseEntity.ok()
@@ -93,7 +93,7 @@ public class EstadisticasController {
         byte[] excelContent = service.ingresosMensualesExcel(fechaDesde, fechaHasta);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        headers.set(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=estadisticasIMensual.xls");
+        headers.set(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=estadisticasIMensual.xlsx");
         headers.setContentLength(excelContent.length);
 
         return ResponseEntity.ok()
@@ -109,7 +109,7 @@ public class EstadisticasController {
         byte[] excelContent = service.gananciasNetasExcel(fechaDesde, fechaHasta);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        headers.set(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=estadisticasGanancias.xls");
+        headers.set(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=estadisticasGanancias.xlsx");
         headers.setContentLength(excelContent.length);
 
         return ResponseEntity.ok()
@@ -125,7 +125,7 @@ public class EstadisticasController {
         byte[] excelContent = service.cantidadPedidosPorClienteExcel(fechaDesde, fechaHasta);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        headers.set(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=estadisticasPedidos.xls");
+        headers.set(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=estadisticasPedidos.xlsx");
         headers.setContentLength(excelContent.length);
 
         return ResponseEntity.ok()

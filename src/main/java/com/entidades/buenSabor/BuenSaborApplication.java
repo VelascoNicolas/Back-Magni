@@ -27,52 +27,17 @@ import java.util.Set;
 public class BuenSaborApplication {
 	private static final Logger logger = LoggerFactory.getLogger(BuenSaborApplication.class);
 
-	@Autowired
-	private ClienteRepository clienteRepository;
-	@Autowired
-	private ImagenClienteRepository imagenPersonaRepository;
-	@Autowired
-	private PromocionDetalleRepository promocionDetalleRepository;
-	@Autowired
-	private PaisRepository paisRepository;
-	@Autowired
-	private ProvinciaRepository provinciaRepository;
-	@Autowired
-	private LocalidadRepository localidadRepository;
-	@Autowired
-	private EmpresaRepository empresaRepository;
-	@Autowired
-	private SucursalRepository sucursalRepository;
-	@Autowired
-	private DomicilioRepository domicilioRepository;
-	@Autowired
-	private UnidadMedidaRepository unidadMedidaRepository;
-	@Autowired
-	private CategoriaRepository categoriaRepository;
-	@Autowired
-	private ArticuloInsumoRepository articuloInsumoRepository;
-	@Autowired
-	private ArticuloManufacturadoRepository articuloManufacturadoRepository;
-	@Autowired
-	private ImagenArticuloRepository imagenArticuloRepository;
-	@Autowired
-	private PromocionRepository promocionRepository;
-	@Autowired
-	private ArticuloManufacturadoDetalleRepository articuloManufacturadoDetalleRepository;
-	@Autowired
-	private PedidoRepository pedidoRepository;
-
 	public static void main(String[] args) {
 		SpringApplication.run(BuenSaborApplication.class, args);
 		logger.info("Estoy activo en el main Alberto");
 	}
 
+	@Autowired
+	private ArticuloManufacturadoDetalleRepository articuloManufacturadoDetalleRepository;
+
 	@Bean
 	@Transactional
 	CommandLineRunner init(ClienteRepository clienteRepository,
-						   ImagenClienteRepository imagenClienteRepository,
-						   ImagenPromocionRepository imagenPromocionRepository,
-						   PromocionDetalleRepository promocionDetalleRepository,
 						   PaisRepository paisRepository,
 						   ProvinciaRepository provinciaRepository,
 						   LocalidadRepository localidadRepository,
@@ -83,7 +48,6 @@ public class BuenSaborApplication {
 						   CategoriaRepository categoriaRepository,
 						   ArticuloInsumoRepository articuloInsumoRepository,
 						   ArticuloManufacturadoRepository articuloManufacturadoRepository,
-						   ImagenArticuloRepository imagenArticuloRepository,
 						   PromocionRepository promocionRepository,
 						   PedidoRepository pedidoRepository,
 						   EmpleadoRepository empleadoRepository, FacturaRepository facturaRepository) {

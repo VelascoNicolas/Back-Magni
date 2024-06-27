@@ -9,6 +9,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +57,7 @@ public class EstadisticasServiceImpl implements EstadisticasService {
     @Override
     public byte[] rankingExcel(Date fechaDesde, Date fechaHasta) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Workbook workbook = new HSSFWorkbook();
+        XSSFWorkbook workbook = new XSSFWorkbook();
 
         Sheet sheet = workbook.createSheet("Ranking de comidas");
 
@@ -91,7 +92,7 @@ public class EstadisticasServiceImpl implements EstadisticasService {
 
     @Override
     public byte[] ingresosDiariosExcel(Date fechaDesde, Date fechaHasta) throws IOException {
-        Workbook workbook = new HSSFWorkbook();
+        XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet2 = workbook.createSheet("Ingresos Diarios");
 
         // Crear encabezado
@@ -125,7 +126,7 @@ public class EstadisticasServiceImpl implements EstadisticasService {
 
     @Override
     public byte[] ingresosMensualesExcel(Date fechaDesde, Date fechaHasta) throws IOException {
-        Workbook workbook = new HSSFWorkbook();
+        XSSFWorkbook workbook = new XSSFWorkbook();
 
         Sheet sheet3 = workbook.createSheet("Ingresos Mensuales");
 
@@ -161,7 +162,7 @@ public class EstadisticasServiceImpl implements EstadisticasService {
 
     @Override
     public byte[] gananciasNetasExcel(Date fechaDesde, Date fechaHasta) throws IOException {
-        Workbook workbook = new HSSFWorkbook();
+        XSSFWorkbook workbook = new XSSFWorkbook();
 
         Sheet sheet5 = workbook.createSheet("Monto de Ganancia");
 
@@ -196,7 +197,7 @@ public class EstadisticasServiceImpl implements EstadisticasService {
 
     @Override
     public byte[] cantidadPedidosPorClienteExcel(Date fechaDesde, Date fechaHasta) throws IOException {
-        Workbook workbook = new HSSFWorkbook();
+        XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet4 = workbook.createSheet("Pedidos por Cliente");
 
         // Crear encabezado
