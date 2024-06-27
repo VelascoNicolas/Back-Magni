@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-27T16:36:12-0300",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
+    date = "2024-06-27T16:55:38-0300",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.7.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
 public class SucursalMapperImpl implements SucursalMapper {
@@ -30,9 +30,7 @@ public class SucursalMapperImpl implements SucursalMapper {
         SucursalDto sucursalDto = new SucursalDto();
 
         sucursalDto.setId( source.getId() );
-        if ( source.isEliminado() != null ) {
-            sucursalDto.setEliminado( source.isEliminado() );
-        }
+        sucursalDto.setEliminado( source.isEliminado() );
         sucursalDto.setFechaBaja( source.getFechaBaja() );
         sucursalDto.setNombre( source.getNombre() );
         sucursalDto.setEsCasaMatriz( source.isEsCasaMatriz() );

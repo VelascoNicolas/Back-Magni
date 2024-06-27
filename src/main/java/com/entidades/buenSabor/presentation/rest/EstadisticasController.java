@@ -66,6 +66,7 @@ public class EstadisticasController {
 
         return ResponseEntity.ok()
                 .headers(headers)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(excelContent);
     }
 
@@ -81,6 +82,7 @@ public class EstadisticasController {
 
         return ResponseEntity.ok()
                 .headers(headers)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(excelContent);
     }
 
@@ -96,6 +98,7 @@ public class EstadisticasController {
 
         return ResponseEntity.ok()
                 .headers(headers)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(excelContent);
     }
 
@@ -111,6 +114,7 @@ public class EstadisticasController {
 
         return ResponseEntity.ok()
                 .headers(headers)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(excelContent);
 
     }
@@ -126,6 +130,7 @@ public class EstadisticasController {
 
         return ResponseEntity.ok()
                 .headers(headers)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(excelContent);
     }
 }

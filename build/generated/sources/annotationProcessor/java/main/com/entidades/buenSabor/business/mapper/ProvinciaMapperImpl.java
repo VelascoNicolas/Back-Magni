@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-27T16:36:13-0300",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
+    date = "2024-06-27T16:55:38-0300",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.7.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
 public class ProvinciaMapperImpl implements ProvinciaMapper {
@@ -26,9 +26,7 @@ public class ProvinciaMapperImpl implements ProvinciaMapper {
         ProvinciaDto provinciaDto = new ProvinciaDto();
 
         provinciaDto.setId( source.getId() );
-        if ( source.isEliminado() != null ) {
-            provinciaDto.setEliminado( source.isEliminado() );
-        }
+        provinciaDto.setEliminado( source.isEliminado() );
         provinciaDto.setFechaBaja( source.getFechaBaja() );
         provinciaDto.setNombre( source.getNombre() );
         provinciaDto.setPais( paisToPaisDto( source.getPais() ) );
@@ -74,9 +72,7 @@ public class ProvinciaMapperImpl implements ProvinciaMapper {
 
         PaisDto paisDto = new PaisDto();
 
-        if ( pais.isEliminado() != null ) {
-            paisDto.setEliminado( pais.isEliminado() );
-        }
+        paisDto.setEliminado( pais.isEliminado() );
         paisDto.setFechaBaja( pais.getFechaBaja() );
         paisDto.setId( pais.getId() );
         paisDto.setNombre( pais.getNombre() );

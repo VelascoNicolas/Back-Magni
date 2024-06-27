@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-27T16:36:13-0300",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
+    date = "2024-06-27T16:55:38-0300",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.7.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
 public class UnidadMedidaMapperImpl implements UnidadMedidaMapper {
@@ -54,9 +54,7 @@ public class UnidadMedidaMapperImpl implements UnidadMedidaMapper {
         UnidadMedidaDto unidadMedidaDto = new UnidadMedidaDto();
 
         unidadMedidaDto.setId( source.getId() );
-        if ( source.isEliminado() != null ) {
-            unidadMedidaDto.setEliminado( source.isEliminado() );
-        }
+        unidadMedidaDto.setEliminado( source.isEliminado() );
         unidadMedidaDto.setFechaBaja( source.getFechaBaja() );
         unidadMedidaDto.setDenominacion( source.getDenominacion() );
 

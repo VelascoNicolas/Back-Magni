@@ -1,7 +1,9 @@
 package com.entidades.buenSabor.business.mapper;
 
+import com.entidades.buenSabor.domain.dto.ArticuloDto;
 import com.entidades.buenSabor.domain.dto.ArticuloInsumoDto;
 import com.entidades.buenSabor.domain.dto.ArticuloManufacturadoDetalleDto;
+import com.entidades.buenSabor.domain.dto.ArticuloManufacturadoDto;
 import com.entidades.buenSabor.domain.dto.CategoriaHijoDto;
 import com.entidades.buenSabor.domain.dto.DomicilioDto;
 import com.entidades.buenSabor.domain.dto.EmpresaDto;
@@ -11,7 +13,9 @@ import com.entidades.buenSabor.domain.dto.PaisDto;
 import com.entidades.buenSabor.domain.dto.ProvinciaDto;
 import com.entidades.buenSabor.domain.dto.SucursalDto;
 import com.entidades.buenSabor.domain.dto.UnidadMedidaDto;
+import com.entidades.buenSabor.domain.entities.Articulo;
 import com.entidades.buenSabor.domain.entities.ArticuloInsumo;
+import com.entidades.buenSabor.domain.entities.ArticuloManufacturado;
 import com.entidades.buenSabor.domain.entities.ArticuloManufacturadoDetalle;
 import com.entidades.buenSabor.domain.entities.Categoria;
 import com.entidades.buenSabor.domain.entities.Domicilio;
@@ -27,77 +31,214 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.processing.Generated;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-27T17:02:14-0300",
+    date = "2024-06-27T17:01:06-0300",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.7.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
-public class ArticuloManufacturadoDetalleMapperImpl implements ArticuloManufacturadoDetalleMapper {
+public class ArticuloMapperImpl implements ArticuloMapper {
+
+    @Autowired
+    private ArticuloManufacturadoDetalleMapper articuloManufacturadoDetalleMapper;
+    @Autowired
+    private ImagenArticuloMapper imagenArticuloMapper;
 
     @Override
-    public ArticuloManufacturadoDetalleDto toDTO(ArticuloManufacturadoDetalle source) {
+    public ArticuloDto toDTO(Articulo source) {
         if ( source == null ) {
             return null;
         }
 
-        ArticuloManufacturadoDetalleDto articuloManufacturadoDetalleDto = new ArticuloManufacturadoDetalleDto();
+        ArticuloDto articuloDto = new ArticuloDto();
 
-        articuloManufacturadoDetalleDto.setId( source.getId() );
-        articuloManufacturadoDetalleDto.setEliminado( source.isEliminado() );
-        articuloManufacturadoDetalleDto.setFechaBaja( source.getFechaBaja() );
-        articuloManufacturadoDetalleDto.setCantidad( source.getCantidad() );
-        articuloManufacturadoDetalleDto.setArticuloInsumo( articuloInsumoToArticuloInsumoDto( source.getArticuloInsumo() ) );
+        articuloDto.setId( source.getId() );
+        articuloDto.setEliminado( source.isEliminado() );
+        articuloDto.setFechaBaja( source.getFechaBaja() );
+        articuloDto.setDenominacion( source.getDenominacion() );
+        articuloDto.setPrecioVenta( source.getPrecioVenta() );
+        articuloDto.setImagenes( imagenArticuloSetToImagenDtoSet( source.getImagenes() ) );
+        articuloDto.setUnidadMedida( unidadMedidaToUnidadMedidaDto( source.getUnidadMedida() ) );
+        articuloDto.setCategoria( categoriaToCategoriaHijoDto( source.getCategoria() ) );
 
-        return articuloManufacturadoDetalleDto;
+        return articuloDto;
     }
 
     @Override
-    public ArticuloManufacturadoDetalle toEntity(ArticuloManufacturadoDetalleDto source) {
+    public List<ArticuloDto> toDTOsList(List<Articulo> source) {
         if ( source == null ) {
             return null;
         }
 
-        ArticuloManufacturadoDetalle.ArticuloManufacturadoDetalleBuilder<?, ?> articuloManufacturadoDetalle = ArticuloManufacturadoDetalle.builder();
-
-        articuloManufacturadoDetalle.id( source.getId() );
-        articuloManufacturadoDetalle.eliminado( source.isEliminado() );
-        articuloManufacturadoDetalle.fechaBaja( source.getFechaBaja() );
-        articuloManufacturadoDetalle.cantidad( source.getCantidad() );
-        articuloManufacturadoDetalle.articuloInsumo( articuloInsumoDtoToArticuloInsumo( source.getArticuloInsumo() ) );
-
-        return articuloManufacturadoDetalle.build();
-    }
-
-    @Override
-    public List<ArticuloManufacturadoDetalleDto> toDTOsList(List<ArticuloManufacturadoDetalle> source) {
-        if ( source == null ) {
-            return null;
-        }
-
-        List<ArticuloManufacturadoDetalleDto> list = new ArrayList<ArticuloManufacturadoDetalleDto>( source.size() );
-        for ( ArticuloManufacturadoDetalle articuloManufacturadoDetalle : source ) {
-            list.add( toDTO( articuloManufacturadoDetalle ) );
+        List<ArticuloDto> list = new ArrayList<ArticuloDto>( source.size() );
+        for ( Articulo articulo : source ) {
+            list.add( toDTO( articulo ) );
         }
 
         return list;
     }
 
-    protected ImagenDto imagenArticuloToImagenDto(ImagenArticulo imagenArticulo) {
-        if ( imagenArticulo == null ) {
+    @Override
+    public ArticuloDto toDto(Articulo articulo) {
+        if ( articulo == null ) {
             return null;
         }
 
-        ImagenDto imagenDto = new ImagenDto();
+        ArticuloDto articuloDto = new ArticuloDto();
 
-        imagenDto.setId( imagenArticulo.getId() );
-        imagenDto.setEliminado( imagenArticulo.isEliminado() );
-        imagenDto.setFechaBaja( imagenArticulo.getFechaBaja() );
-        imagenDto.setUrl( imagenArticulo.getUrl() );
+        articuloDto.setId( articulo.getId() );
+        articuloDto.setEliminado( articulo.isEliminado() );
+        articuloDto.setFechaBaja( articulo.getFechaBaja() );
+        articuloDto.setDenominacion( articulo.getDenominacion() );
+        articuloDto.setPrecioVenta( articulo.getPrecioVenta() );
+        articuloDto.setImagenes( imagenArticuloSetToImagenDtoSet( articulo.getImagenes() ) );
+        articuloDto.setUnidadMedida( unidadMedidaToUnidadMedidaDto( articulo.getUnidadMedida() ) );
+        articuloDto.setCategoria( categoriaToCategoriaHijoDto( articulo.getCategoria() ) );
 
-        return imagenDto;
+        return articuloDto;
+    }
+
+    @Override
+    public Set<ArticuloDto> toDtoSet(Set<Articulo> articulos) {
+        if ( articulos == null ) {
+            return null;
+        }
+
+        Set<ArticuloDto> set = new LinkedHashSet<ArticuloDto>( Math.max( (int) ( articulos.size() / .75f ) + 1, 16 ) );
+        for ( Articulo articulo : articulos ) {
+            set.add( toDTO( articulo ) );
+        }
+
+        return set;
+    }
+
+    @Override
+    public ArticuloInsumo toEntity(ArticuloInsumoDto dto) {
+        if ( dto == null ) {
+            return null;
+        }
+
+        ArticuloInsumo.ArticuloInsumoBuilder<?, ?> articuloInsumo = ArticuloInsumo.builder();
+
+        articuloInsumo.id( dto.getId() );
+        articuloInsumo.eliminado( dto.isEliminado() );
+        articuloInsumo.fechaBaja( dto.getFechaBaja() );
+        articuloInsumo.denominacion( dto.getDenominacion() );
+        articuloInsumo.precioVenta( dto.getPrecioVenta() );
+        articuloInsumo.imagenes( imagenDtoSetToImagenArticuloSet( dto.getImagenes() ) );
+        articuloInsumo.unidadMedida( unidadMedidaDtoToUnidadMedida( dto.getUnidadMedida() ) );
+        articuloInsumo.categoria( categoriaHijoDtoToCategoria( dto.getCategoria() ) );
+        articuloInsumo.precioCompra( dto.getPrecioCompra() );
+        articuloInsumo.stockActual( dto.getStockActual() );
+        articuloInsumo.stockMaximo( dto.getStockMaximo() );
+        articuloInsumo.stockMinimo( dto.getStockMinimo() );
+        articuloInsumo.esParaElaborar( dto.getEsParaElaborar() );
+
+        return articuloInsumo.build();
+    }
+
+    @Override
+    public ArticuloInsumoDto toDTO(ArticuloInsumo entity) {
+        if ( entity == null ) {
+            return null;
+        }
+
+        ArticuloInsumoDto articuloInsumoDto = new ArticuloInsumoDto();
+
+        articuloInsumoDto.setId( entity.getId() );
+        articuloInsumoDto.setEliminado( entity.isEliminado() );
+        articuloInsumoDto.setFechaBaja( entity.getFechaBaja() );
+        articuloInsumoDto.setDenominacion( entity.getDenominacion() );
+        articuloInsumoDto.setPrecioVenta( entity.getPrecioVenta() );
+        articuloInsumoDto.setImagenes( imagenArticuloSetToImagenDtoSet( entity.getImagenes() ) );
+        articuloInsumoDto.setUnidadMedida( unidadMedidaToUnidadMedidaDto( entity.getUnidadMedida() ) );
+        articuloInsumoDto.setCategoria( categoriaToCategoriaHijoDto( entity.getCategoria() ) );
+        articuloInsumoDto.setPrecioCompra( entity.getPrecioCompra() );
+        articuloInsumoDto.setStockActual( entity.getStockActual() );
+        articuloInsumoDto.setStockMaximo( entity.getStockMaximo() );
+        articuloInsumoDto.setStockMinimo( entity.getStockMinimo() );
+        articuloInsumoDto.setEsParaElaborar( entity.getEsParaElaborar() );
+
+        return articuloInsumoDto;
+    }
+
+    @Override
+    public ArticuloManufacturadoDto toDTO(ArticuloManufacturado entity) {
+        if ( entity == null ) {
+            return null;
+        }
+
+        ArticuloManufacturadoDto articuloManufacturadoDto = new ArticuloManufacturadoDto();
+
+        articuloManufacturadoDto.setId( entity.getId() );
+        articuloManufacturadoDto.setEliminado( entity.isEliminado() );
+        articuloManufacturadoDto.setFechaBaja( entity.getFechaBaja() );
+        articuloManufacturadoDto.setDenominacion( entity.getDenominacion() );
+        articuloManufacturadoDto.setPrecioVenta( entity.getPrecioVenta() );
+        articuloManufacturadoDto.setImagenes( imagenArticuloSetToImagenDtoSet( entity.getImagenes() ) );
+        articuloManufacturadoDto.setUnidadMedida( unidadMedidaToUnidadMedidaDto( entity.getUnidadMedida() ) );
+        articuloManufacturadoDto.setCategoria( categoriaToCategoriaHijoDto( entity.getCategoria() ) );
+        articuloManufacturadoDto.setDescripcion( entity.getDescripcion() );
+        articuloManufacturadoDto.setTiempoEstimadoMinutos( entity.getTiempoEstimadoMinutos() );
+        articuloManufacturadoDto.setPreparacion( entity.getPreparacion() );
+        articuloManufacturadoDto.setArticuloManufacturadoDetalles( articuloManufacturadoDetalleSetToArticuloManufacturadoDetalleDtoSet( entity.getArticuloManufacturadoDetalles() ) );
+
+        return articuloManufacturadoDto;
+    }
+
+    @Override
+    public ArticuloManufacturado toEntity(ArticuloManufacturadoDto dto) {
+        if ( dto == null ) {
+            return null;
+        }
+
+        ArticuloManufacturado.ArticuloManufacturadoBuilder<?, ?> articuloManufacturado = ArticuloManufacturado.builder();
+
+        articuloManufacturado.id( dto.getId() );
+        articuloManufacturado.eliminado( dto.isEliminado() );
+        articuloManufacturado.fechaBaja( dto.getFechaBaja() );
+        articuloManufacturado.denominacion( dto.getDenominacion() );
+        articuloManufacturado.precioVenta( dto.getPrecioVenta() );
+        articuloManufacturado.imagenes( imagenDtoSetToImagenArticuloSet( dto.getImagenes() ) );
+        articuloManufacturado.unidadMedida( unidadMedidaDtoToUnidadMedida( dto.getUnidadMedida() ) );
+        articuloManufacturado.categoria( categoriaHijoDtoToCategoria( dto.getCategoria() ) );
+        articuloManufacturado.descripcion( dto.getDescripcion() );
+        articuloManufacturado.tiempoEstimadoMinutos( dto.getTiempoEstimadoMinutos() );
+        articuloManufacturado.preparacion( dto.getPreparacion() );
+        articuloManufacturado.articuloManufacturadoDetalles( articuloManufacturadoDetalleDtoSetToArticuloManufacturadoDetalleSet( dto.getArticuloManufacturadoDetalles() ) );
+
+        return articuloManufacturado.build();
+    }
+
+    @Override
+    public List<ArticuloInsumoDto> toDtoListInsumo(List<ArticuloInsumo> articulosInsumos) {
+        if ( articulosInsumos == null ) {
+            return null;
+        }
+
+        List<ArticuloInsumoDto> list = new ArrayList<ArticuloInsumoDto>( articulosInsumos.size() );
+        for ( ArticuloInsumo articuloInsumo : articulosInsumos ) {
+            list.add( toDTO( articuloInsumo ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<ArticuloManufacturadoDto> toDtoListManufacturado(List<ArticuloManufacturado> articulosManufacturados) {
+        if ( articulosManufacturados == null ) {
+            return null;
+        }
+
+        List<ArticuloManufacturadoDto> list = new ArrayList<ArticuloManufacturadoDto>( articulosManufacturados.size() );
+        for ( ArticuloManufacturado articuloManufacturado : articulosManufacturados ) {
+            list.add( toDTO( articuloManufacturado ) );
+        }
+
+        return list;
     }
 
     protected Set<ImagenDto> imagenArticuloSetToImagenDtoSet(Set<ImagenArticulo> set) {
@@ -107,7 +248,7 @@ public class ArticuloManufacturadoDetalleMapperImpl implements ArticuloManufactu
 
         Set<ImagenDto> set1 = new LinkedHashSet<ImagenDto>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
         for ( ImagenArticulo imagenArticulo : set ) {
-            set1.add( imagenArticuloToImagenDto( imagenArticulo ) );
+            set1.add( imagenArticuloMapper.toDTO( imagenArticulo ) );
         }
 
         return set1;
@@ -259,45 +400,6 @@ public class ArticuloManufacturadoDetalleMapperImpl implements ArticuloManufactu
         return categoriaHijoDto;
     }
 
-    protected ArticuloInsumoDto articuloInsumoToArticuloInsumoDto(ArticuloInsumo articuloInsumo) {
-        if ( articuloInsumo == null ) {
-            return null;
-        }
-
-        ArticuloInsumoDto articuloInsumoDto = new ArticuloInsumoDto();
-
-        articuloInsumoDto.setId( articuloInsumo.getId() );
-        articuloInsumoDto.setEliminado( articuloInsumo.isEliminado() );
-        articuloInsumoDto.setFechaBaja( articuloInsumo.getFechaBaja() );
-        articuloInsumoDto.setDenominacion( articuloInsumo.getDenominacion() );
-        articuloInsumoDto.setPrecioVenta( articuloInsumo.getPrecioVenta() );
-        articuloInsumoDto.setImagenes( imagenArticuloSetToImagenDtoSet( articuloInsumo.getImagenes() ) );
-        articuloInsumoDto.setUnidadMedida( unidadMedidaToUnidadMedidaDto( articuloInsumo.getUnidadMedida() ) );
-        articuloInsumoDto.setCategoria( categoriaToCategoriaHijoDto( articuloInsumo.getCategoria() ) );
-        articuloInsumoDto.setPrecioCompra( articuloInsumo.getPrecioCompra() );
-        articuloInsumoDto.setStockActual( articuloInsumo.getStockActual() );
-        articuloInsumoDto.setStockMaximo( articuloInsumo.getStockMaximo() );
-        articuloInsumoDto.setStockMinimo( articuloInsumo.getStockMinimo() );
-        articuloInsumoDto.setEsParaElaborar( articuloInsumo.getEsParaElaborar() );
-
-        return articuloInsumoDto;
-    }
-
-    protected ImagenArticulo imagenDtoToImagenArticulo(ImagenDto imagenDto) {
-        if ( imagenDto == null ) {
-            return null;
-        }
-
-        ImagenArticulo.ImagenArticuloBuilder<?, ?> imagenArticulo = ImagenArticulo.builder();
-
-        imagenArticulo.id( imagenDto.getId() );
-        imagenArticulo.eliminado( imagenDto.isEliminado() );
-        imagenArticulo.fechaBaja( imagenDto.getFechaBaja() );
-        imagenArticulo.url( imagenDto.getUrl() );
-
-        return imagenArticulo.build();
-    }
-
     protected Set<ImagenArticulo> imagenDtoSetToImagenArticuloSet(Set<ImagenDto> set) {
         if ( set == null ) {
             return null;
@@ -305,7 +407,7 @@ public class ArticuloManufacturadoDetalleMapperImpl implements ArticuloManufactu
 
         Set<ImagenArticulo> set1 = new LinkedHashSet<ImagenArticulo>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
         for ( ImagenDto imagenDto : set ) {
-            set1.add( imagenDtoToImagenArticulo( imagenDto ) );
+            set1.add( imagenArticuloMapper.toEntity( imagenDto ) );
         }
 
         return set1;
@@ -457,27 +559,29 @@ public class ArticuloManufacturadoDetalleMapperImpl implements ArticuloManufactu
         return categoria.build();
     }
 
-    protected ArticuloInsumo articuloInsumoDtoToArticuloInsumo(ArticuloInsumoDto articuloInsumoDto) {
-        if ( articuloInsumoDto == null ) {
+    protected Set<ArticuloManufacturadoDetalleDto> articuloManufacturadoDetalleSetToArticuloManufacturadoDetalleDtoSet(Set<ArticuloManufacturadoDetalle> set) {
+        if ( set == null ) {
             return null;
         }
 
-        ArticuloInsumo.ArticuloInsumoBuilder<?, ?> articuloInsumo = ArticuloInsumo.builder();
+        Set<ArticuloManufacturadoDetalleDto> set1 = new LinkedHashSet<ArticuloManufacturadoDetalleDto>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
+        for ( ArticuloManufacturadoDetalle articuloManufacturadoDetalle : set ) {
+            set1.add( articuloManufacturadoDetalleMapper.toDTO( articuloManufacturadoDetalle ) );
+        }
 
-        articuloInsumo.id( articuloInsumoDto.getId() );
-        articuloInsumo.eliminado( articuloInsumoDto.isEliminado() );
-        articuloInsumo.fechaBaja( articuloInsumoDto.getFechaBaja() );
-        articuloInsumo.denominacion( articuloInsumoDto.getDenominacion() );
-        articuloInsumo.precioVenta( articuloInsumoDto.getPrecioVenta() );
-        articuloInsumo.imagenes( imagenDtoSetToImagenArticuloSet( articuloInsumoDto.getImagenes() ) );
-        articuloInsumo.unidadMedida( unidadMedidaDtoToUnidadMedida( articuloInsumoDto.getUnidadMedida() ) );
-        articuloInsumo.categoria( categoriaHijoDtoToCategoria( articuloInsumoDto.getCategoria() ) );
-        articuloInsumo.precioCompra( articuloInsumoDto.getPrecioCompra() );
-        articuloInsumo.stockActual( articuloInsumoDto.getStockActual() );
-        articuloInsumo.stockMaximo( articuloInsumoDto.getStockMaximo() );
-        articuloInsumo.stockMinimo( articuloInsumoDto.getStockMinimo() );
-        articuloInsumo.esParaElaborar( articuloInsumoDto.getEsParaElaborar() );
+        return set1;
+    }
 
-        return articuloInsumo.build();
+    protected Set<ArticuloManufacturadoDetalle> articuloManufacturadoDetalleDtoSetToArticuloManufacturadoDetalleSet(Set<ArticuloManufacturadoDetalleDto> set) {
+        if ( set == null ) {
+            return null;
+        }
+
+        Set<ArticuloManufacturadoDetalle> set1 = new LinkedHashSet<ArticuloManufacturadoDetalle>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
+        for ( ArticuloManufacturadoDetalleDto articuloManufacturadoDetalleDto : set ) {
+            set1.add( articuloManufacturadoDetalleMapper.toEntity( articuloManufacturadoDetalleDto ) );
+        }
+
+        return set1;
     }
 }

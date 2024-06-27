@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-27T16:36:12-0300",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
+    date = "2024-06-27T16:55:38-0300",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.7.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
 public class EmpleadoMapperImpl implements EmpleadoMapper {
@@ -65,9 +65,7 @@ public class EmpleadoMapperImpl implements EmpleadoMapper {
         EmpleadoDTO empleadoDTO = new EmpleadoDTO();
 
         empleadoDTO.setId( source.getId() );
-        if ( source.isEliminado() != null ) {
-            empleadoDTO.setEliminado( source.isEliminado() );
-        }
+        empleadoDTO.setEliminado( source.isEliminado() );
         empleadoDTO.setFechaBaja( source.getFechaBaja() );
         empleadoDTO.setActivo( source.isActivo() );
         empleadoDTO.setNombre( source.getNombre() );

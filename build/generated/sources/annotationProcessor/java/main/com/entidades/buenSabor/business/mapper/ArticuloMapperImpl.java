@@ -36,8 +36,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-27T16:36:13-0300",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
+    date = "2024-06-27T17:02:14-0300",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.7.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
 public class ArticuloMapperImpl implements ArticuloMapper {
@@ -56,9 +56,7 @@ public class ArticuloMapperImpl implements ArticuloMapper {
         ArticuloDto articuloDto = new ArticuloDto();
 
         articuloDto.setId( source.getId() );
-        if ( source.isEliminado() != null ) {
-            articuloDto.setEliminado( source.isEliminado() );
-        }
+        articuloDto.setEliminado( source.isEliminado() );
         articuloDto.setFechaBaja( source.getFechaBaja() );
         articuloDto.setDenominacion( source.getDenominacion() );
         articuloDto.setPrecioVenta( source.getPrecioVenta() );
@@ -92,9 +90,7 @@ public class ArticuloMapperImpl implements ArticuloMapper {
         ArticuloDto articuloDto = new ArticuloDto();
 
         articuloDto.setId( articulo.getId() );
-        if ( articulo.isEliminado() != null ) {
-            articuloDto.setEliminado( articulo.isEliminado() );
-        }
+        articuloDto.setEliminado( articulo.isEliminado() );
         articuloDto.setFechaBaja( articulo.getFechaBaja() );
         articuloDto.setDenominacion( articulo.getDenominacion() );
         articuloDto.setPrecioVenta( articulo.getPrecioVenta() );
@@ -153,9 +149,7 @@ public class ArticuloMapperImpl implements ArticuloMapper {
         ArticuloInsumoDto articuloInsumoDto = new ArticuloInsumoDto();
 
         articuloInsumoDto.setId( entity.getId() );
-        if ( entity.isEliminado() != null ) {
-            articuloInsumoDto.setEliminado( entity.isEliminado() );
-        }
+        articuloInsumoDto.setEliminado( entity.isEliminado() );
         articuloInsumoDto.setFechaBaja( entity.getFechaBaja() );
         articuloInsumoDto.setDenominacion( entity.getDenominacion() );
         articuloInsumoDto.setPrecioVenta( entity.getPrecioVenta() );
@@ -180,9 +174,7 @@ public class ArticuloMapperImpl implements ArticuloMapper {
         ArticuloManufacturadoDto articuloManufacturadoDto = new ArticuloManufacturadoDto();
 
         articuloManufacturadoDto.setId( entity.getId() );
-        if ( entity.isEliminado() != null ) {
-            articuloManufacturadoDto.setEliminado( entity.isEliminado() );
-        }
+        articuloManufacturadoDto.setEliminado( entity.isEliminado() );
         articuloManufacturadoDto.setFechaBaja( entity.getFechaBaja() );
         articuloManufacturadoDto.setDenominacion( entity.getDenominacion() );
         articuloManufacturadoDto.setPrecioVenta( entity.getPrecioVenta() );
@@ -270,9 +262,7 @@ public class ArticuloMapperImpl implements ArticuloMapper {
         UnidadMedidaDto unidadMedidaDto = new UnidadMedidaDto();
 
         unidadMedidaDto.setId( unidadMedida.getId() );
-        if ( unidadMedida.isEliminado() != null ) {
-            unidadMedidaDto.setEliminado( unidadMedida.isEliminado() );
-        }
+        unidadMedidaDto.setEliminado( unidadMedida.isEliminado() );
         unidadMedidaDto.setFechaBaja( unidadMedida.getFechaBaja() );
         unidadMedidaDto.setDenominacion( unidadMedida.getDenominacion() );
 
@@ -286,9 +276,7 @@ public class ArticuloMapperImpl implements ArticuloMapper {
 
         PaisDto paisDto = new PaisDto();
 
-        if ( pais.isEliminado() != null ) {
-            paisDto.setEliminado( pais.isEliminado() );
-        }
+        paisDto.setEliminado( pais.isEliminado() );
         paisDto.setFechaBaja( pais.getFechaBaja() );
         paisDto.setId( pais.getId() );
         paisDto.setNombre( pais.getNombre() );
@@ -304,9 +292,7 @@ public class ArticuloMapperImpl implements ArticuloMapper {
         ProvinciaDto provinciaDto = new ProvinciaDto();
 
         provinciaDto.setId( provincia.getId() );
-        if ( provincia.isEliminado() != null ) {
-            provinciaDto.setEliminado( provincia.isEliminado() );
-        }
+        provinciaDto.setEliminado( provincia.isEliminado() );
         provinciaDto.setFechaBaja( provincia.getFechaBaja() );
         provinciaDto.setNombre( provincia.getNombre() );
         provinciaDto.setPais( paisToPaisDto( provincia.getPais() ) );
@@ -322,9 +308,7 @@ public class ArticuloMapperImpl implements ArticuloMapper {
         LocalidadDto localidadDto = new LocalidadDto();
 
         localidadDto.setId( localidad.getId() );
-        if ( localidad.isEliminado() != null ) {
-            localidadDto.setEliminado( localidad.isEliminado() );
-        }
+        localidadDto.setEliminado( localidad.isEliminado() );
         localidadDto.setFechaBaja( localidad.getFechaBaja() );
         localidadDto.setNombre( localidad.getNombre() );
         localidadDto.setProvincia( provinciaToProvinciaDto( localidad.getProvincia() ) );
@@ -340,9 +324,7 @@ public class ArticuloMapperImpl implements ArticuloMapper {
         DomicilioDto domicilioDto = new DomicilioDto();
 
         domicilioDto.setId( domicilio.getId() );
-        if ( domicilio.isEliminado() != null ) {
-            domicilioDto.setEliminado( domicilio.isEliminado() );
-        }
+        domicilioDto.setEliminado( domicilio.isEliminado() );
         domicilioDto.setFechaBaja( domicilio.getFechaBaja() );
         domicilioDto.setCalle( domicilio.getCalle() );
         domicilioDto.setNumero( domicilio.getNumero() );
@@ -362,9 +344,7 @@ public class ArticuloMapperImpl implements ArticuloMapper {
         EmpresaDto empresaDto = new EmpresaDto();
 
         empresaDto.setId( empresa.getId() );
-        if ( empresa.isEliminado() != null ) {
-            empresaDto.setEliminado( empresa.isEliminado() );
-        }
+        empresaDto.setEliminado( empresa.isEliminado() );
         empresaDto.setFechaBaja( empresa.getFechaBaja() );
         empresaDto.setNombre( empresa.getNombre() );
         empresaDto.setRazonSocial( empresa.getRazonSocial() );
@@ -381,9 +361,7 @@ public class ArticuloMapperImpl implements ArticuloMapper {
         SucursalDto sucursalDto = new SucursalDto();
 
         sucursalDto.setId( sucursal.getId() );
-        if ( sucursal.isEliminado() != null ) {
-            sucursalDto.setEliminado( sucursal.isEliminado() );
-        }
+        sucursalDto.setEliminado( sucursal.isEliminado() );
         sucursalDto.setFechaBaja( sucursal.getFechaBaja() );
         sucursalDto.setNombre( sucursal.getNombre() );
         sucursalDto.setEsCasaMatriz( sucursal.isEsCasaMatriz() );
@@ -414,9 +392,7 @@ public class ArticuloMapperImpl implements ArticuloMapper {
         CategoriaHijoDto categoriaHijoDto = new CategoriaHijoDto();
 
         categoriaHijoDto.setId( categoria.getId() );
-        if ( categoria.isEliminado() != null ) {
-            categoriaHijoDto.setEliminado( categoria.isEliminado() );
-        }
+        categoriaHijoDto.setEliminado( categoria.isEliminado() );
         categoriaHijoDto.setFechaBaja( categoria.getFechaBaja() );
         categoriaHijoDto.setDenominacion( categoria.getDenominacion() );
         categoriaHijoDto.setSucursales( sucursalSetToSucursalDtoSet( categoria.getSucursales() ) );

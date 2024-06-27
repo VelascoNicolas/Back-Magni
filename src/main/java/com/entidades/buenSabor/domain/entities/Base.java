@@ -23,11 +23,9 @@ public abstract class Base implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
+    @Builder.Default
     protected boolean eliminado = false;
-
-    public Boolean isEliminado(){
-        return eliminado;
-    }
+    @Builder.Default
     protected LocalDate fechaBaja = LocalDate.of(9999,12,31);
 }
 

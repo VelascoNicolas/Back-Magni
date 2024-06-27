@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-27T16:36:13-0300",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
+    date = "2024-06-27T16:55:38-0300",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.7.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
 public class LocalidadMapperImpl implements LocalidadMapper {
@@ -28,9 +28,7 @@ public class LocalidadMapperImpl implements LocalidadMapper {
         LocalidadDto localidadDto = new LocalidadDto();
 
         localidadDto.setId( source.getId() );
-        if ( source.isEliminado() != null ) {
-            localidadDto.setEliminado( source.isEliminado() );
-        }
+        localidadDto.setEliminado( source.isEliminado() );
         localidadDto.setFechaBaja( source.getFechaBaja() );
         localidadDto.setNombre( source.getNombre() );
         localidadDto.setProvincia( provinciaToProvinciaDto( source.getProvincia() ) );
@@ -76,9 +74,7 @@ public class LocalidadMapperImpl implements LocalidadMapper {
 
         PaisDto paisDto = new PaisDto();
 
-        if ( pais.isEliminado() != null ) {
-            paisDto.setEliminado( pais.isEliminado() );
-        }
+        paisDto.setEliminado( pais.isEliminado() );
         paisDto.setFechaBaja( pais.getFechaBaja() );
         paisDto.setId( pais.getId() );
         paisDto.setNombre( pais.getNombre() );
@@ -94,9 +90,7 @@ public class LocalidadMapperImpl implements LocalidadMapper {
         ProvinciaDto provinciaDto = new ProvinciaDto();
 
         provinciaDto.setId( provincia.getId() );
-        if ( provincia.isEliminado() != null ) {
-            provinciaDto.setEliminado( provincia.isEliminado() );
-        }
+        provinciaDto.setEliminado( provincia.isEliminado() );
         provinciaDto.setFechaBaja( provincia.getFechaBaja() );
         provinciaDto.setNombre( provincia.getNombre() );
         provinciaDto.setPais( paisToPaisDto( provincia.getPais() ) );

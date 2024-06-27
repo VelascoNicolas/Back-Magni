@@ -22,8 +22,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-27T16:36:13-0300",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.4.jar, environment: Java 17.0.10 (Oracle Corporation)"
+    date = "2024-06-27T16:55:38-0300",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.7.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
 public class EmpresaMapperImpl implements EmpresaMapper {
@@ -37,9 +37,7 @@ public class EmpresaMapperImpl implements EmpresaMapper {
         EmpresaDto empresaDto = new EmpresaDto();
 
         empresaDto.setId( source.getId() );
-        if ( source.isEliminado() != null ) {
-            empresaDto.setEliminado( source.isEliminado() );
-        }
+        empresaDto.setEliminado( source.isEliminado() );
         empresaDto.setFechaBaja( source.getFechaBaja() );
         empresaDto.setNombre( source.getNombre() );
         empresaDto.setRazonSocial( source.getRazonSocial() );
@@ -89,9 +87,7 @@ public class EmpresaMapperImpl implements EmpresaMapper {
         EmpresaLargeDto empresaLargeDto = new EmpresaLargeDto();
 
         empresaLargeDto.setId( empresa.getId() );
-        if ( empresa.isEliminado() != null ) {
-            empresaLargeDto.setEliminado( empresa.isEliminado() );
-        }
+        empresaLargeDto.setEliminado( empresa.isEliminado() );
         empresaLargeDto.setFechaBaja( empresa.getFechaBaja() );
         empresaLargeDto.setNombre( empresa.getNombre() );
         empresaLargeDto.setRazonSocial( empresa.getRazonSocial() );
@@ -108,9 +104,7 @@ public class EmpresaMapperImpl implements EmpresaMapper {
 
         PaisDto paisDto = new PaisDto();
 
-        if ( pais.isEliminado() != null ) {
-            paisDto.setEliminado( pais.isEliminado() );
-        }
+        paisDto.setEliminado( pais.isEliminado() );
         paisDto.setFechaBaja( pais.getFechaBaja() );
         paisDto.setId( pais.getId() );
         paisDto.setNombre( pais.getNombre() );
@@ -126,9 +120,7 @@ public class EmpresaMapperImpl implements EmpresaMapper {
         ProvinciaDto provinciaDto = new ProvinciaDto();
 
         provinciaDto.setId( provincia.getId() );
-        if ( provincia.isEliminado() != null ) {
-            provinciaDto.setEliminado( provincia.isEliminado() );
-        }
+        provinciaDto.setEliminado( provincia.isEliminado() );
         provinciaDto.setFechaBaja( provincia.getFechaBaja() );
         provinciaDto.setNombre( provincia.getNombre() );
         provinciaDto.setPais( paisToPaisDto( provincia.getPais() ) );
@@ -144,9 +136,7 @@ public class EmpresaMapperImpl implements EmpresaMapper {
         LocalidadDto localidadDto = new LocalidadDto();
 
         localidadDto.setId( localidad.getId() );
-        if ( localidad.isEliminado() != null ) {
-            localidadDto.setEliminado( localidad.isEliminado() );
-        }
+        localidadDto.setEliminado( localidad.isEliminado() );
         localidadDto.setFechaBaja( localidad.getFechaBaja() );
         localidadDto.setNombre( localidad.getNombre() );
         localidadDto.setProvincia( provinciaToProvinciaDto( localidad.getProvincia() ) );
@@ -162,9 +152,7 @@ public class EmpresaMapperImpl implements EmpresaMapper {
         DomicilioDto domicilioDto = new DomicilioDto();
 
         domicilioDto.setId( domicilio.getId() );
-        if ( domicilio.isEliminado() != null ) {
-            domicilioDto.setEliminado( domicilio.isEliminado() );
-        }
+        domicilioDto.setEliminado( domicilio.isEliminado() );
         domicilioDto.setFechaBaja( domicilio.getFechaBaja() );
         domicilioDto.setCalle( domicilio.getCalle() );
         domicilioDto.setNumero( domicilio.getNumero() );
@@ -184,9 +172,7 @@ public class EmpresaMapperImpl implements EmpresaMapper {
         SucursalDto sucursalDto = new SucursalDto();
 
         sucursalDto.setId( sucursal.getId() );
-        if ( sucursal.isEliminado() != null ) {
-            sucursalDto.setEliminado( sucursal.isEliminado() );
-        }
+        sucursalDto.setEliminado( sucursal.isEliminado() );
         sucursalDto.setFechaBaja( sucursal.getFechaBaja() );
         sucursalDto.setNombre( sucursal.getNombre() );
         sucursalDto.setEsCasaMatriz( sucursal.isEsCasaMatriz() );
