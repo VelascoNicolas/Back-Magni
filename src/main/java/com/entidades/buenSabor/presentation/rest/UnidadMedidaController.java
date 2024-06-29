@@ -4,7 +4,7 @@ import com.entidades.buenSabor.business.facade.Imp.UnidadMedidaFacadeImpl;
 import com.entidades.buenSabor.business.facade.UnidadMedidaFacade;
 import com.entidades.buenSabor.domain.dto.UnidadMedidaDto;
 import com.entidades.buenSabor.domain.entities.UnidadMedida;
-import com.entidades.buenSabor.presentation.rest.Base.BaseControllerImp;
+import com.entidades.buenSabor.presentation.Base.BaseControllerImp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

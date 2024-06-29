@@ -11,4 +11,6 @@ import java.util.Map;
 public interface EmpleadoService extends BaseService<Empleado, Long> {
     Empleado getByUserName(String userName);
     List<Empleado> getBySucursalId(Long id);
+
+    List<Empleado> getInactivos();
 }

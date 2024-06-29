@@ -26,4 +26,9 @@ public class EmpleadoServiceImpl extends BaseServiceImp<Empleado, Long> implemen
     public List<Empleado> getBySucursalId(Long id) {
         return empleadoRepository.getBySucursalId(id);
     }
+
+    @Override
+    public List<Empleado> getInactivos() {
+        return empleadoRepository.getInactivos();
+    }
 }

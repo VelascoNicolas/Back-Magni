@@ -73,9 +73,9 @@ public class PedidoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> agregarFactura(@PathVariable Long id) {
+    public ResponseEntity<?> agregarFactura(@PathVariable Long id, @RequestParam Long idEmpleado) {
         try {
-            pedidoService.agregarFactura(id);
+            pedidoService.agregarFactura(id, idEmpleado);
             Pedido pedido = pedidoService.getByID(id);
             byte[] pdfContent = facturaService.generarFacturaPDF(pedido);
 

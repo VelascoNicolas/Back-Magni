@@ -15,6 +15,9 @@ public interface EmpleadoRepository extends BaseRepository<Empleado,Long> {
     @Query(value = "SELECT * FROM EMPLEADO WHERE EMAIL = :userName", nativeQuery = true)
     public Empleado getByUserName(@Param("userName") String userName);
 
-    @Query(value = "SELECT COUNT(*) FROM EMPLEADO WHERE ACTIVO = TRUE", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM EMPLEADO WHERE ACTIVO = TRUE AND ROL = 'COCINERO'", nativeQuery = true)
     public Integer getCocinerosActivos();
+
+    @Query(value = "SELECT * FROM EMPLEADO WHERE ACTIVO = FALSE", nativeQuery = true)
+    public List<Empleado> getInactivos();
 }

@@ -4,7 +4,7 @@ package com.entidades.buenSabor.presentation.rest;
 import com.entidades.buenSabor.business.facade.ArticuloInsumoFacade;
 import com.entidades.buenSabor.domain.dto.ArticuloInsumoDto;
 
-import com.entidades.buenSabor.presentation.rest.Base.BaseControllerImp;
+import com.entidades.buenSabor.presentation.Base.BaseControllerImp;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

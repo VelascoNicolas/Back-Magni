@@ -1,4 +1,4 @@
-package com.entidades.buenSabor.presentation.rest.Base;
+package com.entidades.buenSabor.presentation.Base;
 
 import com.entidades.buenSabor.business.facade.Base.BaseFacadeImp;
 import com.entidades.buenSabor.domain.dto.BaseDto;

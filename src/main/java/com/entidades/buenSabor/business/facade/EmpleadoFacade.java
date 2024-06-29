@@ -13,4 +13,5 @@ public interface EmpleadoFacade extends BaseFacade<EmpleadoDTO, Long> {
     List<EmpleadoDTO> getAllEmpleados();
     EmpleadoDTO getByUserName(String userName);
     List<EmpleadoDTO> getBySucursalId(Long id);
+    List<EmpleadoDTO> getInactivos();
 }

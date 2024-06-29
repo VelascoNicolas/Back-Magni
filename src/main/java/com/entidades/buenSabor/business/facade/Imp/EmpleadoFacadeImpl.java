@@ -46,4 +46,11 @@ public class EmpleadoFacadeImpl extends BaseFacadeImp<Empleado, EmpleadoDTO, Lon
         List<EmpleadoDTO> dtos = empleadoMapper.toDTOsList(empleados);
         return dtos;
     }
+
+    @Override
+    public List<EmpleadoDTO> getInactivos() {
+        List<Empleado> empleados = empleadoService.getInactivos();
+        List<EmpleadoDTO> dtos = empleadoMapper.toDTOsList(empleados);
+        return dtos;
+    }
 }

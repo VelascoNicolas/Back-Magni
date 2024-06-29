@@ -9,6 +9,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.envers.Audited;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -89,6 +90,7 @@ public class Pedido extends Base{
             }
 
         }
-        this.setTotalCosto(precioCosto);
+        Double costo = (double)Math.round(precioCosto * 100d) / 100d;
+        this.setTotalCosto(costo);
     }
 }

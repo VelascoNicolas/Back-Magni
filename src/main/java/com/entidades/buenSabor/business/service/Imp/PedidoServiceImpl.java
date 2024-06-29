@@ -87,7 +87,7 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public Pedido agregarFactura(Long idPedido) {
+    public Pedido agregarFactura(Long idPedido, Long idEmpleado) {
         Pedido pedido = getByID(idPedido);
         Factura factura = new Factura();
         factura.setFechaFacturacion(pedido.getFechaPedido());
@@ -100,6 +100,7 @@ public class PedidoServiceImpl implements PedidoService {
         }
         factura.setTotal(factura.getSubTotal() - factura.getDescuento());
         pedido.setFactura(factura);
+        pedido.setEmpleado(empleadoRepository.findById(idEmpleado).orElse(null));
         pedido.setEstado(Estado.FACTURADO);
         return pedidoRepository.save(pedido);
     }

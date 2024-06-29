@@ -1,16 +1,14 @@
 package com.entidades.buenSabor.presentation.rest;
 
 import com.entidades.buenSabor.business.facade.ArticuloManufacturadoFacade;
-import com.entidades.buenSabor.domain.dto.ArticuloInsumoDto;
 import com.entidades.buenSabor.domain.dto.ArticuloManufacturadoDto;
-import com.entidades.buenSabor.presentation.rest.Base.BaseControllerImp;
+import com.entidades.buenSabor.presentation.Base.BaseControllerImp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
