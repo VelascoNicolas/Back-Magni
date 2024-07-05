@@ -119,4 +119,13 @@ public class PedidoController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("ERROR FATAL PEDIDO ID");
         }
     }
+
+    @GetMapping("/stock/{idPromocion}")
+    public ResponseEntity<?> getStockByPromocion(@PathVariable Long idPromocion, @RequestBody PedidoDTO pedido) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(pedidoService.checkStock(idPromocion, pedido));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("ERROR FATAL PEDIDO ID");
+        }
+    }
 }
