@@ -123,7 +123,7 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public boolean checkStock(Long idPromocion, PedidoDTO pedido) {
+    public boolean checkStockPromocion(Long idPromocion, PedidoDTO pedido) {
         Promocion promocion = promocionService.getById(idPromocion);
         boolean stock = true;
 
@@ -165,6 +165,54 @@ public class PedidoServiceImpl implements PedidoService {
                     if (detalle.getArticuloInsumo().getStockActual() - pd.getCantidad() * detalle.getCantidad() < detalle.getArticuloInsumo().getStockMinimo()) {
                         stock = false;
                     }
+                }
+            }
+        }
+
+        return stock;
+    }
+
+    @Override
+    public boolean checkStockArticulo(Long idArticulo, PedidoDTO pedido) {
+        Articulo articulo = articuloService.getById(idArticulo);
+        boolean stock = true;
+
+        Pedido save = new Pedido();
+        save.setFechaPedido(pedido.getFechaPedido());
+        save.setEliminado(pedido.isEliminado());
+        save.setEstado(pedido.getEstado());
+        save.setTipoEnvio(pedido.getTipoEnvio());
+        save.setFormaPago(pedido.getFormaPago());
+        save.setDomicilio(pedido.getDomicilio());
+        save.setSucursal(pedido.getSucursal());
+        save.setFactura(null);
+        save.setCliente(pedido.getCliente());
+        save.setEmpleado(pedido.getEmpleado());
+
+        for(DetallePedidoDTO dp : pedido.getDetallePedidos()) {
+            DetallePedido detallePedido = new DetallePedido();
+            detallePedido.setEliminado(dp.isEliminado());
+            detallePedido.setCantidad(dp.getCantidad());
+            detallePedido.setSubTotal(dp.getSubTotal());
+            if (dp.getArticulo() != null) {
+                detallePedido.setArticulo(articuloService.getById(dp.getArticulo()));
+            }
+            if (dp.getPromocion() != null) {
+                detallePedido.setPromocion(promocionService.getById(dp.getPromocion()));
+            }
+            save.getDetallePedidos().add(detallePedido);
+
+        }
+        checkeoStock(save);
+
+        if (articulo instanceof ArticuloInsumo) {
+            if (((ArticuloInsumo) articulo).getStockActual() - 1 < ((ArticuloInsumo) articulo).getStockMinimo()) {
+                stock = false;
+            }
+        } else if (articulo instanceof ArticuloManufacturado) {
+            for (ArticuloManufacturadoDetalle detalle : ((ArticuloManufacturado) articulo).getArticuloManufacturadoDetalles()) {
+                if (detalle.getArticuloInsumo().getStockActual() - detalle.getCantidad() < detalle.getArticuloInsumo().getStockMinimo()) {
+                    stock = false;
                 }
             }
         }

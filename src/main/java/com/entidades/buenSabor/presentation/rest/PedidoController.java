@@ -120,10 +120,19 @@ public class PedidoController {
         }
     }
 
-    @GetMapping("/stock/{idPromocion}")
+    @GetMapping("/stockPromo/{idPromocion}")
     public ResponseEntity<?> getStockByPromocion(@PathVariable Long idPromocion, @RequestBody PedidoDTO pedido) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(pedidoService.checkStock(idPromocion, pedido));
+            return ResponseEntity.status(HttpStatus.OK).body(pedidoService.checkStockPromocion(idPromocion, pedido));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("ERROR FATAL PEDIDO ID");
+        }
+    }
+
+    @GetMapping("/stockArticulo/{idArticulo}")
+    public ResponseEntity<?> getStockByArticulo(@PathVariable Long idArticulo, @RequestBody PedidoDTO pedido) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(pedidoService.checkStockArticulo(idArticulo, pedido));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("ERROR FATAL PEDIDO ID");
         }

@@ -17,5 +17,6 @@ public interface PedidoService {
     public Pedido actualizarEstado(Long idPedido, Estado estado);
     public List<Pedido> getPedidosByCliente(String userName);
     public List<Pedido> getPedidosByEstado(Estado estado);
-    public boolean checkStock(Long idPromocion, PedidoDTO pedido);
+    public boolean checkStockPromocion(Long idPromocion, PedidoDTO pedido);
+    public boolean checkStockArticulo(Long idArticulo, PedidoDTO pedido);
 }
