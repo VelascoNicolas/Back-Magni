@@ -120,7 +120,7 @@ public class PedidoController {
         }
     }
 
-    @GetMapping("/stockPromo/{idPromocion}")
+    @PostMapping("/stockPromo/{idPromocion}")
     public ResponseEntity<?> getStockByPromocion(@PathVariable Long idPromocion, @RequestBody PedidoDTO pedido) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(pedidoService.checkStockPromocion(idPromocion, pedido));
@@ -129,7 +129,7 @@ public class PedidoController {
         }
     }
 
-    @GetMapping("/stockArticulo/{idArticulo}")
+    @PostMapping("/stockArticulo/{idArticulo}")
     public ResponseEntity<?> getStockByArticulo(@PathVariable Long idArticulo, @RequestBody PedidoDTO pedido) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(pedidoService.checkStockArticulo(idArticulo, pedido));
