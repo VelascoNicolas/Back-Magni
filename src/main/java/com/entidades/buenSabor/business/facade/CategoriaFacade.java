@@ -18,6 +18,9 @@ public interface CategoriaFacade extends BaseFacade<CategoriaPadreDto,Long> {
 
     List<CategoriaClaseDTO> getCategoriasBySucursal(Long idSucursal);
 
+    List<CategoriaHijoDto> getCategoriasPadre();
+
     CategoriaHijoDto putCategoria(Long id, CategoriaHijoDto categoriaHijoDto);
     CategoriaHijoDto putPadre(Long id, CategoriaPadreDto categoriaPadreDto);
+
 }

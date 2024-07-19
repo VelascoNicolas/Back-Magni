@@ -2,6 +2,7 @@ package com.entidades.buenSabor.business.service.Imp;
 
 import com.entidades.buenSabor.business.service.Base.BaseServiceImp;
 import com.entidades.buenSabor.business.service.CategoriaService;
+import com.entidades.buenSabor.business.service.SucursalService;
 import com.entidades.buenSabor.domain.entities.Categoria;
 import com.entidades.buenSabor.domain.entities.Sucursal;
 import com.entidades.buenSabor.repositories.CategoriaRepository;
@@ -17,6 +18,9 @@ public class CategoriaServiceImpl extends BaseServiceImp<Categoria,Long> impleme
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @Autowired
+    private SucursalService sucursalService;
+
     @Override
     public String deleteByID(Long id) {
         if (categoriaRepository.existe(id) == false) {
@@ -28,11 +32,10 @@ public class CategoriaServiceImpl extends BaseServiceImp<Categoria,Long> impleme
     }
 
     @Override
-    public void asociarSucursalCategoria(Categoria categoria) {
-        for (Sucursal s: categoria.getSucursales()) {
-            categoriaRepository.insertarSucursalCategoria(s.getId(), categoria.getId());
-        }
+    public List<Categoria> getCategoriasPadre() {
+        return categoriaRepository.getCategoriasPadre();
     }
+
 
     @Override
     public List<Categoria> getCategoriasBySucursal(Long idSucursal) {
@@ -41,7 +44,7 @@ public class CategoriaServiceImpl extends BaseServiceImp<Categoria,Long> impleme
 
     @Override
     public Categoria asociarSubcategoria(Long idCategoriaPadre, Categoria categoriaHijo) {
-        categoriaRepository.save(categoriaHijo);
+        this.saveSucursal(categoriaHijo);
         Categoria categoriaPadre = categoriaRepository.findById(idCategoriaPadre).get();
         categoriaPadre.getSubCategorias().add(categoriaHijo);
         categoriaRepository.save(categoriaPadre);
@@ -60,6 +63,17 @@ public class CategoriaServiceImpl extends BaseServiceImp<Categoria,Long> impleme
     }
 
     @Override
+    public Categoria saveSucursal(Categoria categoria) {
+        Categoria save = categoriaRepository.save(categoria);
+        for (Sucursal s : save.getSucursales()) {
+            Sucursal x = sucursalService.getById(s.getId());
+            x.getCategorias().add(save);
+            sucursalService.update(x, x.getId());
+        }
+        return save;
+    }
+
+    @Override
     public Categoria editado(Long id, Categoria categoria) {
         Categoria c = categoriaRepository.findById(id).get();
         c.setDenominacion(categoria.getDenominacion());
@@ -67,7 +81,9 @@ public class CategoriaServiceImpl extends BaseServiceImp<Categoria,Long> impleme
         c.setSubCategorias(categoria.getSubCategorias());
         categoriaRepository.deleteSucursalCategoria(c.getId());
         c.setSucursales(categoria.getSucursales());
-        this.asociarSucursalCategoria(c);
+        for (Sucursal s : c.getSucursales()) {
+            s.getCategorias().add(c);
+        }
         categoriaRepository.save(c);
         return c;
     }

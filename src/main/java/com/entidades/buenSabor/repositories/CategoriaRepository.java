@@ -23,12 +23,6 @@ public interface CategoriaRepository extends BaseRepository<Categoria,Long>{
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO SUCURSAL_CATEGORIA (SUCURSAL_ID, CATEGORIA_ID)\n" +
-            "VALUES (?1, ?2);", nativeQuery = true)
-    void insertarSucursalCategoria(Long idSucursal, Long idCategoria);
-
-    @Modifying
-    @Transactional
     @Query(value = "DELETE FROM SUCURSAL_CATEGORIA WHERE CATEGORIA_ID = ?1", nativeQuery = true)
     void deleteSucursalCategoria(Long idCategoria);
 
@@ -38,4 +32,7 @@ public interface CategoriaRepository extends BaseRepository<Categoria,Long>{
             "JOIN SUCURSAL s ON sc.SUCURSAL_ID = s.ID\n" +
             "WHERE s.ID = ?1", nativeQuery = true)
     List<Categoria> getCategoriasBySucursal(Long idSucursal);
+
+    @Query(value = "SELECT * FROM CATEGORIA WHERE CATEGORIA_ID IS NULL;", nativeQuery = true)
+    List<Categoria> getCategoriasPadre();
 }

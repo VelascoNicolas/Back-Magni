@@ -9,7 +9,9 @@ import com.entidades.buenSabor.business.service.CategoriaService;
 import com.entidades.buenSabor.domain.dto.CategoriaClaseDTO;
 import com.entidades.buenSabor.domain.dto.CategoriaHijoDto;
 import com.entidades.buenSabor.domain.dto.CategoriaPadreDto;
+import com.entidades.buenSabor.domain.dto.SucursalDto;
 import com.entidades.buenSabor.domain.entities.Categoria;
+import com.entidades.buenSabor.domain.entities.Sucursal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +37,7 @@ public class CategoriaFacadeImpl extends BaseFacadeImp<Categoria, CategoriaPadre
     @Override
     public CategoriaHijoDto postCategoria(CategoriaPadreDto categoriaPadreDto) {
         Categoria request = categoriaMapper.toEntity(categoriaPadreDto);
-        Categoria save = categoriaService.create(request);
-        categoriaService.asociarSucursalCategoria(save);
+        Categoria save = categoriaService.saveSucursal(request);
         return categoriaMapper.toShortDTO(request);
     }
 
@@ -44,13 +45,21 @@ public class CategoriaFacadeImpl extends BaseFacadeImp<Categoria, CategoriaPadre
     public CategoriaHijoDto postCategoriaHijo(Long idCategoriaPadre, CategoriaHijoDto categoriaHijoDto) {
         Categoria request = categoriaMapper.aEntidad(categoriaHijoDto);
         Categoria save = categoriaService.asociarSubcategoria(idCategoriaPadre ,request);
-        categoriaService.asociarSucursalCategoria(save);
         return categoriaMapper.toShortDTO(save);
     }
 
     @Override
     public List<CategoriaHijoDto> getCategoriasByPadre(Long idCategoriaPadre) {
         var entities = categoriaService.getCategoriasByPadre(idCategoriaPadre);
+        return entities
+                .stream()
+                .map(categoriaMapper::toShortDTO)
+                .toList();
+    }
+
+    @Override
+    public List<CategoriaHijoDto> getCategoriasPadre() {
+        var entities = categoriaService.getCategoriasPadre();
         return entities
                 .stream()
                 .map(categoriaMapper::toShortDTO)

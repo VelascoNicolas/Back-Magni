@@ -15,4 +15,5 @@ import java.util.Set;
 public class CategoriaHijoDto extends BaseDto{
     private String denominacion;
     private Set<SucursalDto> sucursales = new HashSet<>();
+
 }

@@ -58,10 +58,18 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaFacade.getCategoriasBySucursal(id));
     }
 
-    @GetMapping("/padre/{id}")
-    public ResponseEntity<List<?>> getCategoriasByPadre(@PathVariable Long id) {
+    //GET CATEGORIAS HIJO
+    @GetMapping("/hijo/{idPadre}")
+    public ResponseEntity<List<?>> getCategoriasByPadre(@PathVariable Long idPadre) {
         logger.info("INICIO GET CATEGORIAS BY PADRE");
-        return ResponseEntity.ok(categoriaFacade.getCategoriasByPadre(id));
+        return ResponseEntity.ok(categoriaFacade.getCategoriasByPadre(idPadre));
+    }
+
+    //GET CATEGORIAS PADRE
+    @GetMapping("/padres")
+    public ResponseEntity<List<?>> getCategoriasPadre() {
+        logger.info("INICIO GET CATEGORIAS PADRE");
+        return ResponseEntity.ok(categoriaFacade.getCategoriasPadre());
     }
 
     @PutMapping("/padre/{id}")
