@@ -123,6 +123,11 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
+    public List<Pedido> getPedidosBySucursal(Long idSucursal) {
+        return pedidoRepository.findBySucursal(idSucursal);
+    }
+
+    @Override
     public boolean checkStockPromocion(Long idPromocion, PedidoDTO pedido) {
         Promocion promocion = promocionService.getById(idPromocion);
         boolean stock = true;

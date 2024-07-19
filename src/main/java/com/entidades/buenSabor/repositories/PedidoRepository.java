@@ -22,6 +22,9 @@ public interface PedidoRepository extends BaseRepository<Pedido,Long>{
     @Query(value = "SELECT * FROM PEDIDO WHERE estado =?1", nativeQuery = true)
     List<Pedido> findByEstado(Estado estado);
 
+    @Query(value = "SELECT * FROM PEDIDO WHERE SUCURSAL_ID =?1", nativeQuery = true)
+    List<Pedido> findBySucursal(Long idSucursal);
+
     @Query(value = "SELECT \n" +
             "    p.FECHA_PEDIDO AS Fecha,\n" +
             "    CAST(SUM(dp.SUB_TOTAL) AS DECIMAL(10, 2)) AS Ingresos\n" +

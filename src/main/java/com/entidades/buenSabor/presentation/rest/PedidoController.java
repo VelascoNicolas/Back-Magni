@@ -32,7 +32,7 @@ public class PedidoController {
     @Autowired
     private EMailService eMailService;
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<List<?>> getPedidos() {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(pedidoService.getTodos());
@@ -50,7 +50,7 @@ public class PedidoController {
         }
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<?> guardarPedido(@RequestBody PedidoDTO pedido,
                                            @RequestParam(value = "precioDelivery", required = true) Double precioDelivery) {
         try {
@@ -99,6 +99,15 @@ public class PedidoController {
             return ResponseEntity.status(HttpStatus.OK).body(pedidoService.actualizarEstado(id, estado));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("ERROR FATAL ACTUALIZAR PEDIDO");
+        }
+    }
+
+    @GetMapping("/sucursal/{idSucursal}")
+    public ResponseEntity<?> getPedidosBySucursal(@PathVariable Long idSucursal) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(pedidoService.getPedidosBySucursal(idSucursal));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Collections.singletonList("ERROR FATAL PEDIDO ID"));
         }
     }
 
