@@ -30,9 +30,13 @@ public interface CategoriaRepository extends BaseRepository<Categoria,Long>{
             "FROM CATEGORIA c\n" +
             "JOIN SUCURSAL_CATEGORIA sc ON c.ID = sc.CATEGORIA_ID\n" +
             "JOIN SUCURSAL s ON sc.SUCURSAL_ID = s.ID\n" +
+            "WHERE s.ID = ?1 AND c.CATEGORIA_ID IS NULL", nativeQuery = true)
+    List<Categoria> getCategoriasPadreBySucursal(Long idSucursal);
+
+    @Query(value = "SELECT c.ID, c.FECHA_BAJA, c.ELIMINADO, c.DENOMINACION, c.CATEGORIA_ID\n" +
+            "FROM CATEGORIA c\n" +
+            "JOIN SUCURSAL_CATEGORIA sc ON c.ID = sc.CATEGORIA_ID\n" +
+            "JOIN SUCURSAL s ON sc.SUCURSAL_ID = s.ID\n" +
             "WHERE s.ID = ?1", nativeQuery = true)
     List<Categoria> getCategoriasBySucursal(Long idSucursal);
-
-    @Query(value = "SELECT * FROM CATEGORIA WHERE CATEGORIA_ID IS NULL;", nativeQuery = true)
-    List<Categoria> getCategoriasPadre();
 }

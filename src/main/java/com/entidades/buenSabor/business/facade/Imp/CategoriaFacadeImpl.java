@@ -49,8 +49,8 @@ public class CategoriaFacadeImpl extends BaseFacadeImp<Categoria, CategoriaPadre
     }
 
     @Override
-    public List<CategoriaHijoDto> getCategoriasByPadre(Long idCategoriaPadre) {
-        var entities = categoriaService.getCategoriasByPadre(idCategoriaPadre);
+    public List<CategoriaHijoDto> getCategoriasByPadre(Long idSucursal, Long idCategoriaPadre) {
+        var entities = categoriaService.getCategoriasByPadre(idSucursal, idCategoriaPadre);
         return entities
                 .stream()
                 .map(categoriaMapper::toShortDTO)
@@ -58,20 +58,11 @@ public class CategoriaFacadeImpl extends BaseFacadeImp<Categoria, CategoriaPadre
     }
 
     @Override
-    public List<CategoriaHijoDto> getCategoriasPadre() {
-        var entities = categoriaService.getCategoriasPadre();
+    public List<CategoriaHijoDto> getCategoriasPadre(Long idSucursal) {
+        var entities = categoriaService.getCategoriasPadre(idSucursal);
         return entities
                 .stream()
                 .map(categoriaMapper::toShortDTO)
-                .toList();
-    }
-
-    @Override
-    public List<CategoriaClaseDTO> getCategoriasBySucursal(Long idSucursal) {
-        var entities = categoriaService.getCategoriasBySucursal(idSucursal);
-        return entities
-                .stream()
-                .map(categoriaMapper::toClaseDTO)
                 .toList();
     }
 

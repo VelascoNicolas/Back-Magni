@@ -32,14 +32,8 @@ public class CategoriaServiceImpl extends BaseServiceImp<Categoria,Long> impleme
     }
 
     @Override
-    public List<Categoria> getCategoriasPadre() {
-        return categoriaRepository.getCategoriasPadre();
-    }
-
-
-    @Override
-    public List<Categoria> getCategoriasBySucursal(Long idSucursal) {
-        return categoriaRepository.getCategoriasBySucursal(idSucursal);
+    public List<Categoria> getCategoriasPadre(Long idSucursal) {
+        return categoriaRepository.getCategoriasPadreBySucursal(idSucursal);
     }
 
     @Override
@@ -53,11 +47,15 @@ public class CategoriaServiceImpl extends BaseServiceImp<Categoria,Long> impleme
     }
 
     @Override
-    public List<Categoria> getCategoriasByPadre(Long idCategoriaPadre) {
+    public List<Categoria> getCategoriasByPadre(Long idSucursal, Long idCategoriaPadre) {
         Categoria categoriaPadre = categoriaRepository.findById(idCategoriaPadre).get();
         List<Categoria> hijos = new ArrayList();
         for(Categoria c : categoriaPadre.getSubCategorias()) {
-            hijos.add(c);
+            for (Sucursal s : c.getSucursales()) {
+                if (s.getId().equals(idSucursal)) {
+                    hijos.add(c);
+                }
+            }
         }
         return hijos;
     }
