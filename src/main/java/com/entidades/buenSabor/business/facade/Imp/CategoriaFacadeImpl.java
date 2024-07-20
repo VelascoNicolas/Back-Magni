@@ -43,7 +43,9 @@ public class CategoriaFacadeImpl extends BaseFacadeImp<Categoria, CategoriaPadre
 
     @Override
     public CategoriaHijoDto postCategoriaHijo(Long idCategoriaPadre, CategoriaHijoDto categoriaHijoDto) {
+    //    categoriaHijoDto.setId(null);
         Categoria request = categoriaMapper.aEntidad(categoriaHijoDto);
+        request.setId(null);
         Categoria save = categoriaService.asociarSubcategoria(idCategoriaPadre ,request);
         return categoriaMapper.toShortDTO(save);
     }
