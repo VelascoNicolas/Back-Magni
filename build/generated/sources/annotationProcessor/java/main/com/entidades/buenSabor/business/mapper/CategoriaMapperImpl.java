@@ -1,6 +1,5 @@
 package com.entidades.buenSabor.business.mapper;
 
-import com.entidades.buenSabor.domain.dto.CategoriaClaseDTO;
 import com.entidades.buenSabor.domain.dto.CategoriaHijoDto;
 import com.entidades.buenSabor.domain.dto.CategoriaPadreDto;
 import com.entidades.buenSabor.domain.dto.SucursalDto;
@@ -16,14 +15,12 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-20T13:51:25-0300",
+    date = "2024-07-20T17:15:50-0300",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.7.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
 public class CategoriaMapperImpl implements CategoriaMapper {
 
-    @Autowired
-    private ArticuloMapper articuloMapper;
     @Autowired
     private SucursalMapper sucursalMapper;
 
@@ -109,25 +106,6 @@ public class CategoriaMapperImpl implements CategoriaMapper {
         categoriaHijoDto.setSucursales( sucursalSetToSucursalDtoSet( source.getSucursales() ) );
 
         return categoriaHijoDto;
-    }
-
-    @Override
-    public CategoriaClaseDTO toClaseDTO(Categoria source) {
-        if ( source == null ) {
-            return null;
-        }
-
-        CategoriaClaseDTO categoriaClaseDTO = new CategoriaClaseDTO();
-
-        categoriaClaseDTO.setId( source.getId() );
-        categoriaClaseDTO.setEliminado( source.isEliminado() );
-        categoriaClaseDTO.setFechaBaja( source.getFechaBaja() );
-        categoriaClaseDTO.setDenominacion( source.getDenominacion() );
-        categoriaClaseDTO.setSucursales( sucursalSetToSucursalDtoSet( source.getSucursales() ) );
-        categoriaClaseDTO.setSubCategorias( categoriaSetToCategoriaHijoDtoSet( source.getSubCategorias() ) );
-        categoriaClaseDTO.setArticulos( articuloMapper.toDtoSet( source.getArticulos() ) );
-
-        return categoriaClaseDTO;
     }
 
     protected Set<SucursalDto> sucursalSetToSucursalDtoSet(Set<Sucursal> set) {

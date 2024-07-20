@@ -39,4 +39,7 @@ public interface CategoriaRepository extends BaseRepository<Categoria,Long>{
             "JOIN SUCURSAL s ON sc.SUCURSAL_ID = s.ID\n" +
             "WHERE s.ID = ?1", nativeQuery = true)
     List<Categoria> getCategoriasBySucursal(Long idSucursal);
+
+    @Query(value = "SELECT * FROM CATEGORIA WHERE CATEGORIA_ID IS NULL", nativeQuery = true)
+    List<Categoria> getAllCategoriasPadre();
 }

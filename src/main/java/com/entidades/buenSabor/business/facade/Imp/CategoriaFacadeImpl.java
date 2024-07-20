@@ -69,6 +69,15 @@ public class CategoriaFacadeImpl extends BaseFacadeImp<Categoria, CategoriaPadre
     }
 
     @Override
+    public List<CategoriaHijoDto> getAllCategoriasPadre() {
+        var entities = categoriaService.getAllCategoriasPadre();
+        return entities
+                .stream()
+                .map(categoriaMapper::toShortDTO)
+                .toList();
+    }
+
+    @Override
     public CategoriaHijoDto putCategoria(Long id, CategoriaHijoDto categoriaHijoDto) {
         Categoria request = categoriaMapper.aEntidad(categoriaHijoDto);
         Categoria save = categoriaService.editado(id, request);

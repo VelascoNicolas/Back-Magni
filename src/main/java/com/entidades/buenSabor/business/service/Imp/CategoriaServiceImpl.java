@@ -72,6 +72,11 @@ public class CategoriaServiceImpl extends BaseServiceImp<Categoria,Long> impleme
     }
 
     @Override
+    public List<Categoria> getAllCategoriasPadre() {
+        return categoriaRepository.getAllCategoriasPadre();
+    }
+
+    @Override
     public Categoria editado(Long id, Categoria categoria) {
         Categoria c = categoriaRepository.findById(id).get();
         c.setDenominacion(categoria.getDenominacion());

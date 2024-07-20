@@ -11,6 +11,6 @@ public interface CategoriaService extends BaseService<Categoria,Long> {
     Categoria asociarSubcategoria(Long idCategoriaPadre, Categoria categoria);
     List<Categoria> getCategoriasByPadre(Long idSucursal, Long idCategoriaPadre);
     Categoria saveSucursal(Categoria categoria);
-
+    List<Categoria> getAllCategoriasPadre();
     Categoria editado(Long id, Categoria categoria);
 }
