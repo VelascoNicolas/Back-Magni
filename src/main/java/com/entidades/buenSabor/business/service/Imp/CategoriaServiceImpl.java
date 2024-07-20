@@ -81,13 +81,23 @@ public class CategoriaServiceImpl extends BaseServiceImp<Categoria,Long> impleme
         Categoria c = categoriaRepository.findById(id).get();
         c.setDenominacion(categoria.getDenominacion());
         c.setEliminado(categoria.isEliminado());
-        c.setSubCategorias(categoria.getSubCategorias());
+        c.getSubCategorias().clear();
+        for (Categoria c2 : categoria.getSubCategorias()) {
+            c.getSubCategorias().add(c2);
+            categoriaRepository.save(c);
+        }
         categoriaRepository.deleteSucursalCategoria(c.getId());
         c.setSucursales(categoria.getSucursales());
         for (Sucursal s : c.getSucursales()) {
-            s.getCategorias().add(c);
+            Sucursal x = sucursalService.getById(s.getId());
+            x.getCategorias().add(c);
+            sucursalService.update(x, x.getId());
         }
-        categoriaRepository.save(c);
-        return c;
+        return categoriaRepository.save(c);
+    }
+
+    @Override
+    public List<Categoria> getAllHijasPorPadre(Long idPadre) {
+        return categoriaRepository.getHijasByPadre(idPadre);
     }
 }

@@ -64,6 +64,13 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaFacade.getAllCategoriasPadre());
     }
 
+    //GET ALL HIJAS POR PADRE
+    @GetMapping("/hijas/{idPadre}")
+    public ResponseEntity<List<?>> getAllHijasPorPadre(@PathVariable Long idPadre) {
+        logger.info("INICIO GET ALL HIJAS POR PADRE");
+        return ResponseEntity.ok(categoriaFacade.getAllHijasPorPadre(idPadre));
+    }
+
     //PUT PADRE
     @PutMapping("/padre/{id}")
     public ResponseEntity<?> updateCategoria(@PathVariable Long id, @RequestBody CategoriaPadreDto categoriaPadreDto) {

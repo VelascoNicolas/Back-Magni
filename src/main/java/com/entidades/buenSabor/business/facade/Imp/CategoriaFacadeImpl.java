@@ -90,4 +90,13 @@ public class CategoriaFacadeImpl extends BaseFacadeImp<Categoria, CategoriaPadre
         Categoria save = categoriaService.editado(id, request);
         return categoriaMapper.toShortDTO(save);
     }
+
+    @Override
+    public List<CategoriaHijoDto> getAllHijasPorPadre(Long idPadre) {
+        var entities = categoriaService.getAllHijasPorPadre(idPadre);
+        return entities
+                .stream()
+                .map(categoriaMapper::toShortDTO)
+                .toList();
+    }
 }

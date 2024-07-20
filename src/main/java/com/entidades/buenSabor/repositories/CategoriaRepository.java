@@ -42,4 +42,7 @@ public interface CategoriaRepository extends BaseRepository<Categoria,Long>{
 
     @Query(value = "SELECT * FROM CATEGORIA WHERE CATEGORIA_ID IS NULL", nativeQuery = true)
     List<Categoria> getAllCategoriasPadre();
+
+    @Query(value = "SELECT * FROM CATEGORIA WHERE CATEGORIA_ID = ?1", nativeQuery = true)
+    List<Categoria> getHijasByPadre(Long idCategoriaPadre);
 }
