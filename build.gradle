@@ -74,7 +74,9 @@ dependencies {
 	implementation 'com.itextpdf:kernel:7.1.15'
 	implementation 'com.itextpdf:layout:7.1.15'
 
-
+	//SERVLET
+	// https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api
+	compileOnly 'jakarta.servlet:jakarta.servlet-api:6.1.0'
 }
 
 tasks.named('test') {

@@ -109,6 +109,9 @@ public class PedidoServiceImpl implements PedidoService {
     public Pedido actualizarEstado(Long idPedido, Estado estado) {
         Pedido pedido = getByID(idPedido);
         pedido.setEstado(estado);
+        if (estado == Estado.CANCELADO || estado == Estado.RECHAZADO) {
+            devolverStock(pedido);
+        }
         return pedidoRepository.save(pedido);
     }
 
@@ -243,6 +246,35 @@ public class PedidoServiceImpl implements PedidoService {
                     } else if (detalle.getArticulo() instanceof ArticuloManufacturado) {
                         for (ArticuloManufacturadoDetalle detalle2 : ((ArticuloManufacturado) detalle.getArticulo()).getArticuloManufacturadoDetalles()) {
                             detalle2.getArticuloInsumo().setStockActual(detalle2.getArticuloInsumo().getStockActual() - (dp.getCantidad() * detalle.getCantidad() * detalle2.getCantidad()));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void devolverStock(Pedido pedido) {
+        for (DetallePedido dp : pedido.getDetallePedidos()) {
+            if (dp.getArticulo() != null) {
+                if (dp.getArticulo() instanceof ArticuloInsumo) {
+                    ((ArticuloInsumo) dp.getArticulo()).setStockActual(((ArticuloInsumo) dp.getArticulo()).getStockActual() + dp.getCantidad());
+                    articuloInsumoRepository.save((ArticuloInsumo) dp.getArticulo());
+                } else if (dp.getArticulo() instanceof ArticuloManufacturado) {
+                    for (ArticuloManufacturadoDetalle detalle : ((ArticuloManufacturado) dp.getArticulo()).getArticuloManufacturadoDetalles()) {
+                        detalle.getArticuloInsumo().setStockActual(detalle.getArticuloInsumo().getStockActual() + (dp.getCantidad() * detalle.getCantidad()));
+                        articuloInsumoRepository.save(detalle.getArticuloInsumo());
+                    }
+                }
+            }
+            if (dp.getPromocion() != null) {
+                for (PromocionDetalle detalle : dp.getPromocion().getPromocionDetalles()) {
+                    if (detalle.getArticulo() instanceof ArticuloInsumo) {
+                        ((ArticuloInsumo) detalle.getArticulo()).setStockActual(((ArticuloInsumo) detalle.getArticulo()).getStockActual() + (dp.getCantidad() * detalle.getCantidad()));
+                        articuloInsumoRepository.save((ArticuloInsumo) detalle.getArticulo());
+                    } else if (detalle.getArticulo() instanceof ArticuloManufacturado) {
+                        for (ArticuloManufacturadoDetalle detalle2 : ((ArticuloManufacturado) detalle.getArticulo()).getArticuloManufacturadoDetalles()) {
+                            detalle2.getArticuloInsumo().setStockActual(detalle2.getArticuloInsumo().getStockActual() + (dp.getCantidad() * detalle.getCantidad() * detalle2.getCantidad()));
+                            articuloInsumoRepository.save(detalle2.getArticuloInsumo());
                         }
                     }
                 }
