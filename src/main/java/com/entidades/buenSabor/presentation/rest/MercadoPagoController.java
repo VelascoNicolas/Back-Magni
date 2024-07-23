@@ -32,9 +32,9 @@ public class MercadoPagoController {
 
             //MAPEAR URL DE ESTADO
             PreferenceBackUrlsRequest backURL = PreferenceBackUrlsRequest.builder()
-                    .success("http://localhost:5173/cliente/mpExito")
-                    .pending("http://localhost:5173/cliente/mpPending")
-                    .failure("http://localhost:5173/cliente/mpError")
+                    .success("http://localhost:5173/cliente/mpExito/" + pedido.getId())
+                    .pending("http://localhost:5173/cliente/mpPending/" + pedido.getId())
+                    .failure("http://localhost:5173/cliente/mpError/" + pedido.getId())
                     .build();
 
             //EXCLUIR PAGO EN EFECTIVO POR MERCADO PAGO
